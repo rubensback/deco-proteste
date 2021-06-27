@@ -26,6 +26,9 @@
     "react-hooks/exhaustive-deps": "warn",
     "no-use-before-define": "off",
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-unused-vars": "warn",
+    "import/prefer-default-export": "off",
+    "react/prop-types": "off"
   }
 }
