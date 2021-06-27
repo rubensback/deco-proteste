@@ -26,10 +26,12 @@
     "react-hooks/exhaustive-deps": "warn",
     "no-use-before-define": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
     "prettier/prettier": "error",
     "no-unused-vars": "warn",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
-    "no-console": ["warn", { "allow": ["warn", "error", "info"] }]
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "no-alert":"off"
   }
 }

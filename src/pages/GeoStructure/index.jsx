@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import { Box } from '@material-ui/core';
-import { TabContext, TabPanel } from '@material-ui/lab';
+import { TabContext } from '@material-ui/lab';
 
 import Overview from './Overview';
 import Control from './Control';
 
 import { useConcelhos } from '../../hooks/concelho';
 
-import { Tab, TabList } from './styles';
+import { Tab, TabList, TabPanel } from './styles';
 
 const sections = {
   OVERVIEW: 0,
@@ -17,7 +17,7 @@ const sections = {
 };
 
 const GeoStructure = () => {
-  const [section, setSection] = useState(sections.OVERVIEW);
+  const [section, setSection] = useState(sections.NEW);
   const { loadConcelhos } = useConcelhos();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const GeoStructure = () => {
   }, []);
 
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" minHeight="100vh">
       <TabContext value={section}>
         <TabList
           onChange={(_, value) => setSection(value)}
@@ -39,10 +39,10 @@ const GeoStructure = () => {
           <Overview />
         </TabPanel>
         <TabPanel value={sections.NEW}>
-          <Control />
+          <Control goBack={() => setSection(sections.OVERVIEW)} />
         </TabPanel>
         <TabPanel value={sections.EDIT}>
-          <Control />
+          <Control goBack={() => setSection(sections.OVERVIEW)} />
         </TabPanel>
       </TabContext>
     </Box>

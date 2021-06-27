@@ -9,7 +9,7 @@ export const ConcelhosProvider = ({ children }) => {
 
   const loadConcelhos = useCallback(async () => {
     try {
-      const concelhos = await api.get('/concelho');
+      const concelhos = await api.get('/concelhos');
 
       setData(concelhos.data);
     } catch (error) {
@@ -17,8 +17,24 @@ export const ConcelhosProvider = ({ children }) => {
     }
   }, []);
 
+  const addConcelho = useCallback(async concelho => {
+    try {
+      await api.post('/concelhos', concelho);
+
+      setData(state => [...state, concelho]);
+
+      return concelho;
+    } catch (error) {
+      alert('Something went wrong, please try again.');
+      console.error(error);
+      return null;
+    }
+  }, []);
+
   return (
-    <ConcelhosContext.Provider value={{ concelhos: data, loadConcelhos }}>
+    <ConcelhosContext.Provider
+      value={{ concelhos: data, loadConcelhos, addConcelho }}
+    >
       {children}
     </ConcelhosContext.Provider>
   );

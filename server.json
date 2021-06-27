@@ -6,8 +6,8 @@
       "distrito": "santarem",
       "acronym": "",
       "name": "Abrantes",
-      "initial_zipcode": "2000-000",
-      "final_zipcode": "2100-000"
+      "initialZipcode": "2000-000",
+      "finalZipcode": "2100-000"
     },
     {
       "id": 2,
@@ -15,8 +15,8 @@
       "distrito": "aveiro",
       "acronym": "",
       "name": "águeda",
-      "initial_zipcode": "2100-001",
-      "final_zipcode": "2200-000"
+      "initialZipcode": "2100-001",
+      "finalZipcode": "2200-000"
     },
     {
       "id": 3,
@@ -24,8 +24,8 @@
       "distrito": "braga",
       "acronym": "",
       "name": "aguiar da beira",
-      "initial_zipcode": "2200-001",
-      "final_zipcode": "2300-000"
+      "initialZipcode": "2200-001",
+      "finalZipcode": "2300-000"
     },
     {
       "id": 4,
@@ -33,8 +33,8 @@
       "distrito": "évora",
       "acronym": "",
       "name": "alandroal",
-      "initial_zipcode": "3000-000",
-      "final_zipcode": "3100-000"
+      "initialZipcode": "3000-000",
+      "finalZipcode": "3100-000"
     },
     {
       "id": 5,
@@ -42,8 +42,8 @@
       "distrito": "alcobaça",
       "acronym": "",
       "name": "leiria",
-      "initial_zipcode": "4000-000",
-      "final_zipcode": "4100-000"
+      "initialZipcode": "4000-000",
+      "finalZipcode": "4100-000"
     }
   ]
 }
