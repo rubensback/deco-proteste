@@ -1,0 +1,49 @@
+{
+  "concelhos": [
+    {
+      "id": 1,
+      "country": "portugal",
+      "distrito": "santarem",
+      "acronym": "",
+      "name": "Abrantes",
+      "initial_zipcode": "2000-000",
+      "final_zipcode": "2100-000"
+    },
+    {
+      "id": 2,
+      "country": "portugal",
+      "distrito": "aveiro",
+      "acronym": "",
+      "name": "águeda",
+      "initial_zipcode": "2100-001",
+      "final_zipcode": "2200-000"
+    },
+    {
+      "id": 3,
+      "country": "portugal",
+      "distrito": "braga",
+      "acronym": "",
+      "name": "aguiar da beira",
+      "initial_zipcode": "2200-001",
+      "final_zipcode": "2300-000"
+    },
+    {
+      "id": 4,
+      "country": "portugal",
+      "distrito": "évora",
+      "acronym": "",
+      "name": "alandroal",
+      "initial_zipcode": "3000-000",
+      "final_zipcode": "3100-000"
+    },
+    {
+      "id": 5,
+      "country": "portugal",
+      "distrito": "alcobaça",
+      "acronym": "",
+      "name": "leiria",
+      "initial_zipcode": "4000-000",
+      "final_zipcode": "4100-000"
+    }
+  ]
+}

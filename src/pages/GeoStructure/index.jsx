@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Box } from '@material-ui/core';
 import { TabContext, TabPanel } from '@material-ui/lab';
 
 import Overview from './Overview';
 import Control from './Control';
+
+import { useConcelhos } from '../../hooks/concelho';
 
 import { Tab, TabList } from './styles';
 
@@ -16,6 +18,11 @@ const sections = {
 
 const GeoStructure = () => {
   const [section, setSection] = useState(sections.OVERVIEW);
+  const { loadConcelhos } = useConcelhos();
+
+  useEffect(() => {
+    loadConcelhos();
+  }, []);
 
   return (
     <Box>

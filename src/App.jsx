@@ -1,7 +1,12 @@
+import { ConcelhosProvider } from './hooks/concelho';
 import Routes from './routes';
 
 function App() {
-  return <Routes />;
+  return (
+    <ConcelhosProvider>
+      <Routes />
+    </ConcelhosProvider>
+  );
 }
 
 export default App;

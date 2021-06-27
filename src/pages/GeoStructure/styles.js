@@ -7,10 +7,6 @@ export const Tab = styled(MuiTab)`
   &.Mui-disabled {
     display: none;
   }
-
-  &.MuiTabs-indicator {
-    background-color: blue;
-  }
 `;
 
 export const TabList = styled(MuiTabs)`
