@@ -6,11 +6,12 @@ const Input = ({
   name,
   required = false,
   register,
-  watch,
   fullWidth = true,
   label = '',
   errors,
   options,
+  readOnly,
+  defaultValue,
   ...rest
 }) => {
   const { ref, ...registerRest } = register(name);
@@ -27,7 +28,9 @@ const Input = ({
         helperText={!!errors[name] && errors[name].message}
         select={isSelect}
         InputLabelProps={{ shrink: false }}
-        label={watch(name) ? '' : label}
+        inputProps={{ readOnly }}
+        displayEmpty
+        defaultValue={defaultValue}
         {...rest}
       >
         {isSelect &&

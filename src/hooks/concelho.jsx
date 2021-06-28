@@ -19,11 +19,33 @@ export const ConcelhosProvider = ({ children }) => {
 
   const addConcelho = useCallback(async concelho => {
     try {
-      await api.post('/concelhos', concelho);
+      const { data: newConcelho } = await api.post('/concelhos', concelho);
 
-      setData(state => [...state, concelho]);
+      setData(state => [...state, newConcelho]);
 
-      return concelho;
+      return newConcelho;
+    } catch (error) {
+      alert('Something went wrong, please try again.');
+      console.error(error);
+      return null;
+    }
+  }, []);
+
+  const editConcelho = useCallback(async concelho => {
+    try {
+      const { data: newConcelho } = await api.put(
+        `/concelhos/${concelho.id}`,
+        concelho,
+      );
+
+      setData(state =>
+        state.map(c => {
+          if (c.id === concelho.id) return concelho;
+          return c;
+        }),
+      );
+
+      return newConcelho;
     } catch (error) {
       alert('Something went wrong, please try again.');
       console.error(error);
@@ -33,7 +55,7 @@ export const ConcelhosProvider = ({ children }) => {
 
   return (
     <ConcelhosContext.Provider
-      value={{ concelhos: data, loadConcelhos, addConcelho }}
+      value={{ concelhos: data, loadConcelhos, addConcelho, editConcelho }}
     >
       {children}
     </ConcelhosContext.Provider>

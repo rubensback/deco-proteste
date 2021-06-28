@@ -14,15 +14,17 @@ const sections = {
   OVERVIEW: 0,
   NEW: 1,
   EDIT: 2,
+  VIEW: 3,
 };
 
 const GeoStructure = () => {
-  const [section, setSection] = useState(sections.NEW);
+  const [section, setSection] = useState(sections.OVERVIEW);
   const { loadConcelhos } = useConcelhos();
+  const [concelhoSelected, setConcelhoSelected] = useState([]);
 
   useEffect(() => {
     loadConcelhos();
-  }, []);
+  }, [loadConcelhos]);
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
@@ -32,17 +34,36 @@ const GeoStructure = () => {
           classes={{ indicator: 'indicator' }}
         >
           <Tab label="Overview" />
-          <Tab label="New" disabled={section === sections.EDIT} />
+          <Tab
+            label="New"
+            disabled={section === sections.EDIT || section === sections.VIEW}
+          />
           <Tab label="Edit" disabled={section !== sections.EDIT} />
+          <Tab label="View" disabled={section !== sections.VIEW} />
         </TabList>
         <TabPanel value={sections.OVERVIEW}>
-          <Overview />
+          <Overview
+            setConcelhoSelected={setConcelhoSelected}
+            goToEdit={() => setSection(sections.EDIT)}
+            goToView={() => setSection(sections.VIEW)}
+          />
         </TabPanel>
         <TabPanel value={sections.NEW}>
-          <Control goBack={() => setSection(sections.OVERVIEW)} />
+          <Control goBack={() => setSection(sections.OVERVIEW)} type="new" />
         </TabPanel>
         <TabPanel value={sections.EDIT}>
-          <Control goBack={() => setSection(sections.OVERVIEW)} />
+          <Control
+            goBack={() => setSection(sections.OVERVIEW)}
+            concelho={concelhoSelected}
+            type="edit"
+          />
+        </TabPanel>
+        <TabPanel value={sections.VIEW}>
+          <Control
+            goBack={() => setSection(sections.OVERVIEW)}
+            concelho={concelhoSelected}
+            type="view"
+          />
         </TabPanel>
       </TabContext>
     </Box>

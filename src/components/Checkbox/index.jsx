@@ -8,7 +8,12 @@ const Checkbox = ({ checked, label = '', register, name }) => {
   return (
     <FormControlLabel
       control={
-        <MuiCheckbox checked={checked} inputRef={ref} {...registerRest} />
+        <MuiCheckbox
+          checked={checked}
+          color="primary"
+          {...registerRest}
+          inputRef={ref}
+        />
       }
       label={label}
     />

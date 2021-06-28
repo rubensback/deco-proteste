@@ -3,20 +3,21 @@
     {
       "id": 1,
       "country": "portugal",
-      "distrito": "santarem",
+      "distrito": "santarém",
       "acronym": "",
       "name": "Abrantes",
       "initialZipcode": "2000-000",
       "finalZipcode": "2100-000"
     },
     {
-      "id": 2,
       "country": "portugal",
       "distrito": "aveiro",
-      "acronym": "",
       "name": "águeda",
+      "acronym": "",
       "initialZipcode": "2100-001",
-      "finalZipcode": "2200-000"
+      "finalZipCode": "",
+      "active": false,
+      "id": 2
     },
     {
       "id": 3,
@@ -44,6 +45,26 @@
       "name": "leiria",
       "initialZipcode": "4000-000",
       "finalZipcode": "4100-000"
+    },
+    {
+      "country": "portugal",
+      "distrito": "braga",
+      "name": "Test LastName",
+      "acronym": "",
+      "initialZipcode": "1111-111",
+      "finalZipCode": "",
+      "active": false,
+      "id": 6
+    },
+    {
+      "country": "portugal",
+      "distrito": "beja",
+      "name": "Rubens Back de Almeida",
+      "acronym": "",
+      "initialZipcode": "1150-015",
+      "finalZipCode": "",
+      "active": true,
+      "id": 7
     }
   ]
 }

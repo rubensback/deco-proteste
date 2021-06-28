@@ -20,12 +20,13 @@ const schema = yup.object().shape({
 
 const distritos = [
   { label: 'Aveiro', value: 'aveiro' },
+  { label: 'Alcobaça', value: 'alcobaça' },
   { label: 'Beja', value: 'beja' },
   { label: 'Braga', value: 'braga' },
   { label: 'Bragança', value: 'bragança' },
   { label: 'Branco', value: 'branco' },
   { label: 'Coimbra', value: 'coimbra' },
-  { label: 'Évora', value: 'evora' },
+  { label: 'Évora', value: 'évora' },
   { label: 'Faro', value: 'faro' },
   { label: 'Guarda', value: 'guarda' },
   { label: 'Leiria', value: 'leiria' },
@@ -39,8 +40,8 @@ const distritos = [
   { label: 'Viseu', value: 'viseu' },
 ];
 
-const Control = ({ goBack }) => {
-  const { addConcelho } = useConcelhos();
+const Control = ({ goBack, concelho, type }) => {
+  const { addConcelho, editConcelho } = useConcelhos();
 
   const {
     handleSubmit,
@@ -50,16 +51,24 @@ const Control = ({ goBack }) => {
   } = useForm({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
+    defaultValues: {
+      active: concelho ? concelho.active : false,
+    },
   });
 
   const onSubmit = useCallback(
     async data => {
-      const concelho = await addConcelho(data);
+      let newConcelho;
 
-      if (concelho) goBack(0);
+      if (type === 'new') newConcelho = await addConcelho(data);
+      else newConcelho = await editConcelho({ ...data, id: concelho.id });
+
+      if (newConcelho) goBack(0);
     },
-    [addConcelho, goBack],
+    [addConcelho, editConcelho, goBack, concelho, type],
   );
+
+  console.log('concelho', concelho);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -68,9 +77,9 @@ const Control = ({ goBack }) => {
           <Input
             name="country"
             label="Country"
+            readOnly={type === 'view'}
             required
             register={register}
-            watch={watch}
             errors={errors}
             options={[{ label: 'Portugal', value: 'portugal' }]}
             disabled
@@ -79,9 +88,10 @@ const Control = ({ goBack }) => {
         </Grid>
         <Grid item xs={12}>
           <Input
+            defaultValue={concelho ? concelho.distrito : ''}
             name="distrito"
             label="Distrito"
-            watch={watch}
+            readOnly={type === 'view'}
             required
             register={register}
             errors={errors}
@@ -91,9 +101,10 @@ const Control = ({ goBack }) => {
         </Grid>
         <Grid item xs={12}>
           <Input
+            defaultValue={concelho ? concelho.name : ''}
             name="name"
             label="Name"
-            watch={watch}
+            readOnly={type === 'view'}
             required
             register={register}
             errors={errors}
@@ -101,47 +112,63 @@ const Control = ({ goBack }) => {
         </Grid>
         <Grid item xs={12}>
           <Input
+            defaultValue={concelho ? concelho.acronym : ''}
             name="acronym"
             label="Acronym"
-            watch={watch}
+            readOnly={type === 'view'}
             register={register}
             errors={errors}
           />
         </Grid>
         <Grid item xs={6}>
           <Input
+            defaultValue={concelho ? concelho.initialZipcode : ''}
             name="initialZipcode"
             label="Initial Zip Code"
-            watch={watch}
+            readOnly={type === 'view'}
             register={register}
             errors={errors}
           />
         </Grid>
         <Grid item xs={6}>
           <Input
+            defaultValue={concelho ? concelho.finalZipCode : ''}
             name="finalZipCode"
             label="Final Zip Code"
-            watch={watch}
+            readOnly={type === 'view'}
             register={register}
             errors={errors}
           />
         </Grid>
         <Grid item xs={12}>
-          <Checkbox name="active" label="Active?" register={register} />
+          <Checkbox
+            name="active"
+            label="Active?"
+            checked={watch('active')}
+            register={register}
+          />
         </Grid>
 
-        <Grid container item xs={12} spacing={1}>
+        {type !== 'view' ? (
+          <Grid container item xs={12} spacing={1}>
+            <Grid item>
+              <Button color="primary" type="submit">
+                Save
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button color="secondary" onClick={goBack}>
+                Cancel
+              </Button>
+            </Grid>
+          </Grid>
+        ) : (
           <Grid item>
-            <Button color="primary" type="submit">
-              Save
+            <Button color="primary" onClick={goBack}>
+              Back
             </Button>
           </Grid>
-          <Grid item>
-            <Button color="secondary" onClick={goBack}>
-              Cancel
-            </Button>
-          </Grid>
-        </Grid>
+        )}
       </Grid>
     </form>
   );
