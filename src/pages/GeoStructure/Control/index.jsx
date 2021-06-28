@@ -68,8 +68,6 @@ const Control = ({ goBack, concelho, type }) => {
     [addConcelho, editConcelho, goBack, concelho, type],
   );
 
-  console.log('concelho', concelho);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3} xs={12}>

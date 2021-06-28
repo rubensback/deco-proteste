@@ -1,8 +1,14 @@
 import React, { useCallback, useMemo, useState, useRef } from 'react';
-import { AgGridReact, AgGridColumn } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 
-import { Box } from '@material-ui/core';
-import { Edit, ZoomIn, Visibility, VisibilityOff } from '@material-ui/icons/';
+import { Box, TextField, Button } from '@material-ui/core';
+import {
+  Edit,
+  ZoomIn,
+  Visibility,
+  VisibilityOff,
+  DeleteOutline,
+} from '@material-ui/icons/';
 
 import { useConcelhos } from '../../../hooks/concelho';
 
@@ -38,7 +44,7 @@ const activeCellRenderer = ({ active }) => {
 };
 
 const Overview = ({ setConcelhoSelected, goToEdit, goToView }) => {
-  const { concelhos } = useConcelhos();
+  const { concelhos, deleteConcelhos } = useConcelhos();
   const gridRef = useRef();
 
   const [rowData, setRowData] = useState(null);
@@ -72,7 +78,7 @@ const Overview = ({ setConcelhoSelected, goToEdit, goToView }) => {
   }, [concelhos]);
 
   const onQuickFilterChanged = useCallback(value => {
-    gridRef.api.current.setQuickFilter(value);
+    gridRef.current.api.setQuickFilter(value);
   }, []);
 
   const action = useCallback(
@@ -84,6 +90,13 @@ const Overview = ({ setConcelhoSelected, goToEdit, goToView }) => {
     },
     [goToView, goToEdit, setConcelhoSelected],
   );
+
+  const handleDelete = useCallback(async () => {
+    const selectedNodes = gridRef.current.api.getSelectedNodes();
+    const selectedData = selectedNodes.map(node => node.data);
+
+    await deleteConcelhos(selectedData);
+  }, [deleteConcelhos]);
 
   const columnData = useMemo(
     () => [
@@ -121,7 +134,19 @@ const Overview = ({ setConcelhoSelected, goToEdit, goToView }) => {
 
   return (
     <Box className="ag-theme-alpine">
-      <input onChange={e => onQuickFilterChanged(e.target.value)} />
+      <Box display="flex" justifyContent="space-between" mb={2}>
+        <Button
+          startIcon={<DeleteOutline style={{ color: 'red' }} />}
+          onClick={handleDelete}
+        >
+          Remove Selected
+        </Button>
+        <TextField
+          variant="outlined"
+          onChange={e => onQuickFilterChanged(e.target.value)}
+          placeholder="Pesquisa"
+        />
+      </Box>
       <AgGridReact
         ref={gridRef}
         rowData={rowData}

@@ -45,26 +45,6 @@
       "name": "leiria",
       "initialZipcode": "4000-000",
       "finalZipcode": "4100-000"
-    },
-    {
-      "country": "portugal",
-      "distrito": "braga",
-      "name": "Test LastName",
-      "acronym": "",
-      "initialZipcode": "1111-111",
-      "finalZipCode": "",
-      "active": false,
-      "id": 6
-    },
-    {
-      "country": "portugal",
-      "distrito": "beja",
-      "name": "Rubens Back de Almeida",
-      "acronym": "",
-      "initialZipcode": "1150-015",
-      "finalZipCode": "",
-      "active": true,
-      "id": 7
     }
   ]
 }
